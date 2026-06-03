@@ -40,14 +40,18 @@ function toggleGroup(triggerId, defaultPage) {
     // Collapse
     trigger.classList.remove('open', 'active');
     subList.classList.remove('open');
+    subList.style.maxHeight = '0';
+    subList.style.overflow = 'hidden';
   } else {
     // Expand
     trigger.classList.add('open', 'active');
     subList.classList.add('open');
+    subList.style.maxHeight = '400px';
+    subList.style.overflow = 'hidden';
     // Load the default sub-page
     if (defaultPage) {
       const subEl = document.querySelector(`.nav-sub-item[data-page="${defaultPage}"]`);
-      showPage(defaultPage, null, subEl);
+      showPage(defaultPage, triggerId, subEl);
     }
   }
 }
