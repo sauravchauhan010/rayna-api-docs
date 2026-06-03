@@ -37,18 +37,11 @@ function toggleGroup(triggerId, defaultPage) {
   const isOpen = trigger.classList.contains('open');
 
   if (isOpen) {
-    // Collapse
     trigger.classList.remove('open', 'active');
     subList.classList.remove('open');
-    subList.style.maxHeight = '0';
-    subList.style.overflow = 'hidden';
   } else {
-    // Expand
     trigger.classList.add('open', 'active');
     subList.classList.add('open');
-    subList.style.maxHeight = '400px';
-    subList.style.overflow = 'hidden';
-    // Load the default sub-page
     if (defaultPage) {
       const subEl = document.querySelector(`.nav-sub-item[data-page="${defaultPage}"]`);
       showPage(defaultPage, triggerId, subEl);
@@ -165,15 +158,12 @@ function restoreFromHash(hash) {
   // Check if it belongs to a group
   const subEl = document.querySelector(`.nav-sub-item[data-page="${hash}"]`);
   if (subEl) {
-    // Find parent group
     const subList = subEl.closest('.nav-sub-list');
     const triggerId = subList ? subList.id.replace('-list', '') : null;
     if (triggerId) {
       const trigger = document.getElementById(triggerId);
-      if (trigger) {
-        trigger.classList.add('open', 'active');
-        subList.classList.add('open');
-      }
+      if (trigger) trigger.classList.add('open', 'active');
+      if (subList) subList.classList.add('open');
     }
     showPage(hash, triggerId, subEl);
     return;
