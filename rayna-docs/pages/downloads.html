@@ -1,0 +1,222 @@
+<div class="page-title">Documentation &amp; <span class="accent">Downloads</span></div>
+<p class="page-intro">Status codes, custom error codes, transfer types, booking statuses, image path construction, and accepted date formats.</p>
+
+<!-- ══ HTTP STATUS CODES ══ -->
+<h2 class="section-heading">HTTP Status Codes</h2>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Status Code</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><span class="badge badge-get">200</span></td><td class="status-ok">OK</td></tr>
+      <tr><td>2</td><td><span class="badge badge-string">400</span></td><td>Bad Request — <a href="#" style="color:var(--accent2);text-decoration:none;">Download API Collection</a></td></tr>
+      <tr><td>3</td><td><span class="badge badge-string">401</span></td><td class="status-err">Unauthorized</td></tr>
+      <tr><td>4</td><td><span class="badge badge-string">403</span></td><td class="status-err">Forbidden</td></tr>
+      <tr><td>5</td><td><span class="badge badge-string">404</span></td><td class="status-err">Not Found</td></tr>
+      <tr><td>6</td><td><span class="badge badge-string">500</span></td><td class="status-err">Internal Server Error</td></tr>
+      <tr><td>7</td><td><span class="badge badge-string">503</span></td><td class="status-err">Service Unavailable</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ CUSTOM ERROR CODES ══ -->
+<h2 class="section-heading">Custom Error Codes</h2>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Error Code</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><span class="badge badge-int">100</span></td><td>AdultRate or ChildRate is lower than system price.</td></tr>
+      <tr><td>2</td><td><span class="badge badge-int">101</span></td><td>You do not have a sufficient credit limit. Please contact administrator.</td></tr>
+      <tr><td>3</td><td><span class="badge badge-int">102</span></td><td>Travel date should not be less than current date.</td></tr>
+      <tr><td>4</td><td><span class="badge badge-int">103</span></td><td>Adult should be more than zero.</td></tr>
+      <tr><td>5</td><td><span class="badge badge-int">104</span></td><td>Pickup Details is compulsory in Private and Sharing Transfer.</td></tr>
+      <tr><td>6</td><td><span class="badge badge-int">105</span></td><td>Start Time is compulsory.</td></tr>
+      <tr><td>7</td><td><span class="badge badge-int">106</span></td><td>You must pass Pax Type. / Invalid Pax Type.</td></tr>
+      <tr><td>8</td><td><span class="badge badge-int">107</span></td><td>This Tour is not Available.</td></tr>
+      <tr><td>9</td><td><span class="badge badge-int">108</span></td><td>Your Event Id and Start Date and Time should be correct.</td></tr>
+      <tr><td>10</td><td><span class="badge badge-int">109</span></td><td>You have put wrong City Id.</td></tr>
+      <tr><td>11</td><td><span class="badge badge-int">110</span></td><td>Tour is not available for this City.</td></tr>
+      <tr><td>12</td><td><span class="badge badge-int">111</span></td><td>Travel date should be Compulsory.</td></tr>
+      <tr><td>13</td><td><span class="badge badge-int">112</span></td><td>Travel date should be MM-DD-YYYY.</td></tr>
+      <tr><td>14</td><td><span class="badge badge-int">113</span></td><td>Invalid Transfer Type.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ TRANSFER TYPE ══ -->
+<h2 class="section-heading">Transfer Type</h2>
+<p>Every product has a default transfer type. The below IDs are passed along with specific product IDs.</p>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Transfer Name</th><th>Transfer ID</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Without Transfer</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">41865</code></td></tr>
+      <tr><td>2</td><td>Sharing Transfer</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">41843</code></td></tr>
+      <tr><td>3</td><td>Private Transfer</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">41844</code></td></tr>
+      <tr><td>4</td><td>Private Boat Without Transfers</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">43129</code></td></tr>
+      <tr><td>5</td><td>Pvt Yacht Without Transfer</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">43110</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0 0 32px;">
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+    <div style="font-size:11px;font-weight:600;color:var(--accent2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">Without Transfer</div>
+    <p style="font-size:13px;color:var(--text2);margin:0;">Skip the transfer and travel to the selected attraction or destination on your own.</p>
+  </div>
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+    <div style="font-size:11px;font-weight:600;color:var(--accent2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">Sharing Transfer</div>
+    <p style="font-size:13px;color:var(--text2);margin:0;">You'll share the ride with other guests who travel on the same route.</p>
+  </div>
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+    <div style="font-size:11px;font-weight:600;color:var(--accent2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">Private Transfer</div>
+    <p style="font-size:13px;color:var(--text2);margin:0;">This non-shared, personalized transfer is reserved exclusively for you and your travel companions.</p>
+  </div>
+  <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px;">
+    <div style="font-size:11px;font-weight:600;color:var(--accent2);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">Private Boat / Pvt Yacht</div>
+    <p style="font-size:13px;color:var(--text2);margin:0;">Privately organized tour without transfer included.</p>
+  </div>
+</div>
+
+<!-- ══ BOOKING STATUS ══ -->
+<h2 class="section-heading">Booking Status</h2>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>#</th><th>Booking Status</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><span class="badge badge-get">Success</span></td>
+        <td>You will receive a <code style="font-family:var(--font-mono);color:var(--accent2);font-size:12px">referenceNo</code> which is guaranteed proof of your reservation.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><span class="badge badge-string">Rejected</span></td>
+        <td>Booking can be rejected due to: price change, allocation unavailable, stop sale at last minute, inventory sold out, or session timeout. The amount is credited to your wallet instantly.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><span class="badge" style="background:rgba(100,116,139,.15);color:var(--text3);border:1px solid var(--border)">Cancelled</span></td>
+        <td>Booking can be cancelled if not confirmed at supplier side, or if cancelled by the user.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ IMAGE PATH ══ -->
+<h2 class="section-heading">Image Path</h2>
+<p>Image paths returned by the API come in two forms — <strong style="color:var(--text)">full URLs</strong> and <strong style="color:var(--text)">partial paths</strong>. You must handle both cases when rendering images.</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0 28px;">
+  <div style="background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:18px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="background:rgba(34,197,94,.15);color:var(--green);font-size:10px;font-weight:700;font-family:var(--font-mono);padding:3px 8px;border-radius:4px;letter-spacing:.5px;">FULL URL</span>
+      <span style="font-size:12px;color:var(--text3);">starts with <code style="font-family:var(--font-mono);font-size:11px;color:var(--text2)">http</code></span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin:0;">Use the URL <strong style="color:var(--text)">as-is</strong>. No modification needed.</p>
+  </div>
+  <div style="background:rgba(249,115,22,.06);border:1px solid rgba(249,115,22,.2);border-radius:10px;padding:18px;">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">
+      <span style="background:rgba(249,115,22,.15);color:var(--accent);font-size:10px;font-weight:700;font-family:var(--font-mono);padding:3px 8px;border-radius:4px;letter-spacing:.5px;">PARTIAL PATH</span>
+      <span style="font-size:12px;color:var(--text3);">starts with <code style="font-family:var(--font-mono);font-size:11px;color:var(--text2)">/</code></span>
+    </div>
+    <p style="font-size:13px;color:var(--text2);margin:0;">Prepend the <strong style="color:var(--text)">CDN base URL</strong> and append <code style="font-family:var(--font-mono);color:var(--accent2);font-size:12px">_L.jpg</code></p>
+  </div>
+</div>
+
+<h3 class="sub-heading">CDN Base URL</h3>
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">CDN</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy
+    </button>
+  </div>
+  <pre>https://d2cazmkfw8kdtj.cloudfront.net</pre>
+</div>
+
+<h3 class="sub-heading">Construction Logic</h3>
+<div style="background:var(--code-bg);border:1px solid var(--code-border);border-radius:10px;padding:22px 24px;margin:0 0 20px;font-family:var(--font-mono);font-size:13px;line-height:2;">
+  <div style="color:var(--text3);font-size:11px;letter-spacing:.8px;text-transform:uppercase;margin-bottom:14px;">API returns image path</div>
+
+  <div style="display:flex;align-items:flex-start;gap:0;margin-bottom:18px;">
+    <div style="display:flex;flex-direction:column;align-items:center;margin-right:14px;padding-top:2px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--green);flex-shrink:0;"></div>
+      <div style="width:1px;flex:1;background:var(--border);margin:4px 0;min-height:28px;"></div>
+    </div>
+    <div style="flex:1;">
+      <div style="color:var(--green);font-size:11px;font-weight:600;letter-spacing:.5px;margin-bottom:4px;">IF path starts with "http" → use directly</div>
+      <div style="color:var(--text2);font-size:12px;word-break:break-all;">e.g. <span style="color:var(--accent2)">https://d2cazmkfw8kdtj.cloudfront.net/Tour-Images/.../filename.jpg</span></div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:flex-start;gap:0;">
+    <div style="display:flex;flex-direction:column;align-items:center;margin-right:14px;padding-top:2px;">
+      <div style="width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div>
+    </div>
+    <div style="flex:1;">
+      <div style="color:var(--accent);font-size:11px;font-weight:600;letter-spacing:.5px;margin-bottom:6px;">IF path does NOT start with "http" → construct URL</div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:7px;padding:12px 14px;font-size:12px;line-height:2;word-break:break-all;">
+        <span style="color:var(--text3)">// Partial path from API:</span><br/>
+        <span style="color:var(--yellow)">/Tour-Images/Final/Dubai-Dolphinarium-65/1725257059039</span><br/><br/>
+        <span style="color:var(--text3)">// Result:</span><br/>
+        <span style="color:var(--blue)">https://d2cazmkfw8kdtj.cloudfront.net</span><span style="color:var(--yellow)">/Tour-Images/Final/Dubai-Dolphinarium-65/1725257059039</span><span style="color:var(--green)">_L.jpg</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 class="sub-heading">Code Example</h3>
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">JavaScript</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy
+    </button>
+  </div>
+<pre><span class="k">const</span> <span class="n">CDN_BASE</span> = <span class="s">'https://d2cazmkfw8kdtj.cloudfront.net'</span>;
+
+<span class="k">function</span> <span class="n">getImageUrl</span>(<span class="n">imagePath</span>) {
+  <span class="k">if</span> (!<span class="n">imagePath</span>) <span class="k">return</span> <span class="k">null</span>;
+
+  <span class="c">// Full URL — use as-is</span>
+  <span class="k">if</span> (<span class="n">imagePath</span>.<span class="n">startsWith</span>(<span class="s">'http'</span>)) {
+    <span class="k">return</span> <span class="n">imagePath</span>;
+  }
+
+  <span class="c">// Partial path — prepend CDN + append _L.jpg</span>
+  <span class="k">return</span> <span class="n">CDN_BASE</span> + <span class="n">imagePath</span> + <span class="s">'_L.jpg'</span>;
+}</pre>
+</div>
+
+<h3 class="sub-heading">Image Sizes</h3>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Image Type</th><th>Dimensions</th><th>Usage</th></tr></thead>
+    <tbody>
+      <tr><td>Front Image</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">270px × 180px</code></td><td style="color:var(--text2);">Listing cards / thumbnails</td></tr>
+      <tr><td>Gallery</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">900px × 500px</code></td><td style="color:var(--text2);">Detail page gallery</td></tr>
+      <tr><td>Background</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">1902px × 572px</code></td><td style="color:var(--text2);">Hero / banner backgrounds</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ══ DATE FORMAT ══ -->
+<h2 class="section-heading">Date Format</h2>
+<p>The following date formats are accepted in the request payload:</p>
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">Accepted Formats</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy
+    </button>
+  </div>
+<pre><span class="c">// Supported date formats for payload</span>
+<span class="n">1)</span> <span class="s">MM/dd/yyyy</span>    <span class="c">// e.g. 12/31/2024</span>
+<span class="n">2)</span> <span class="s">MM-dd-yyyy</span>    <span class="c">// e.g. 12-31-2024</span>
+<span class="n">3)</span> <span class="s">yyyy-MM-dd</span>    <span class="c">// e.g. 2024-12-31</span>
+<span class="n">4)</span> <span class="s">yyyy/MM/dd</span>    <span class="c">// e.g. 2024/12/31</span>
+<span class="n">5)</span> <span class="s">MM.dd.yyyy</span>    <span class="c">// e.g. 12.31.2024</span></pre>
+</div>
