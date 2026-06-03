@@ -1,0 +1,50 @@
+<div class="page-title">Introduction</div>
+<p class="page-intro">
+  This document provides technical details about the APIs — the business processes,
+  connection specifications, and integration guidelines for developers.
+</p>
+
+<h2 class="section-heading">Connection Properties</h2>
+<p>Communication with the system is performed through HTTPS connections. The following properties must be used:</p>
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>Request</th><th>Value</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Request Method</td><td><span class="badge badge-post">POST</span></td><td>All API calls use the POST method.</td></tr>
+      <tr><td>Content-Type</td><td><code style="font-family:var(--font-mono);color:var(--accent2);font-size:13px">application/json</code></td><td>The content type for all requests.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h2 class="section-heading">Request / Response</h2>
+<p>It is recommended that all booking and cancellation transactions sent through the Test / Live environment be logged and maintained by the travel agent for at least 6 months.</p>
+
+<h3 class="sub-heading">Go-Test / Live Process</h3>
+<p>To start testing, notify our support team via e-mail. All transactions through the test system are simply test transactions and will not be sent to suppliers.</p>
+
+<div class="callout">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <span>Do not compare the products with the Live Environment. The system functionality is identical except that bookings processed in the Test environment are not sent to Suppliers. Whitelisting of the Test/Live Server IP address is essential.</span>
+</div>
+
+<h2 class="section-heading">Client Requirements</h2>
+<ul class="doc-list">
+  <li>Client requests must be issued from a public, static IP address registered with the System.</li>
+  <li>Client requests must be made via an HTTPS POST request.</li>
+  <li>SSL is required.</li>
+  <li>All data sent and received via the interface will be encoded in UTF-8.</li>
+</ul>
+
+<h2 class="section-heading">Development Phase</h2>
+<p>Once you receive your Access Token, you can start development. Communication consists of simple JSON message exchanges (request/response) between your application and the system. Each request must be posted via HTTPS POST.</p>
+
+<div class="code-block">
+  <div class="code-header">
+    <span class="code-lang">Base URL</span>
+    <button class="copy-btn" onclick="copyCode(this)">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy
+    </button>
+  </div>
+  <pre>https://api.yourdomain.com/v2/</pre>
+</div>
