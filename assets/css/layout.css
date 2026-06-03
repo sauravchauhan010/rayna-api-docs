@@ -156,12 +156,9 @@ body {
 .nav-group-trigger.open .chevron { transform: rotate(180deg); opacity: .8; }
 .nav-group-trigger.hidden { display: none; }
 
-.nav-sub-list {
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height .25s ease;
-}
-.nav-sub-list.open { max-height: 400px; }
+/* Sub-list: hidden by default via display:none, JS toggles to display:block */
+.nav-sub-list { display: none; }
+.nav-sub-list.open { display: block; }
 
 .nav-sub-item {
   display: flex;
