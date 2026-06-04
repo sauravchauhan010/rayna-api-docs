@@ -1,54 +1,77 @@
 // ── NAVIGATION ──
 
 const PAGE_TITLES = {
-  introduction:            'Introduction',
-  implementation:          'Implementation Approach',
-  downloads:               'Documentation & Downloads',
-  faq:                     'FAQ',
-  contact:                 'Contact Us',
-  process:                 'Process Description',
-  country:                 'Country',
-  city:                    'City',
-  'static-data':           'Tour Static Data',
-  'static-data-by-id':     'Tour Static Data by Id',
-  'option-static-data':    'Option Static Data',
-  'tour-price':            'Tour Price',
-  'tour-options':          'Tour Options',
-  'tour-timeslot':         'Tour Timeslot',
-  'tour-availability':     'Tour Availability',
-  'cancellation-policy':   'Tour Cancellation Policy',
-  'tour-booking':          'Tour Booking',
-  'ticket-details':        'Ticket Details',
-  'tour-cancellation':     'Tour Cancellation',
+  introduction:           'Introduction',
+  implementation:         'Implementation Approach',
+  downloads:              'Documentation & Downloads',
+  faq:                    'FAQ',
+  contact:                'Contact Us',
+  process:                'Process Description',
+  country:                'Country',
+  city:                   'City',
+  'static-data':          'Tour Static Data',
+  'static-data-by-id':    'Tour Static Data by Id',
+  'option-static-data':   'Option Static Data',
+  'tour-price':           'Tour Price',
+  'tour-options':         'Tour Options',
+  'tour-timeslot':        'Tour Timeslot',
+  'tour-availability':    'Tour Availability',
+  'cancellation-policy':  'Tour Cancellation Policy',
+  'tour-booking':         'Tour Booking',
+  'ticket-details':       'Ticket Details',
+  'tour-cancellation':    'Tour Cancellation',
 };
 
+// Cache fetched pages
 const pageCache = {};
 
-// ── LOAD PAGE ──
-async function loadPage(id, groupTriggerId) {
+/**
+ * Toggle an expandable nav group open/closed.
+ * If a defaultPage is provided, load it when opening.
+ */
+function toggleGroup(triggerId, defaultPage) {
+  const trigger  = document.getElementById(triggerId);
+  const subList  = document.getElementById(triggerId + '-list');
+  if (!trigger || !subList) return;
+
+  const isOpen = trigger.classList.contains('open');
+
+  if (isOpen) {
+    trigger.classList.remove('open', 'active');
+    subList.classList.remove('open');
+  } else {
+    trigger.classList.add('open', 'active');
+    subList.classList.add('open');
+    if (defaultPage) {
+      const subEl = document.querySelector(`.nav-sub-item[data-page="${defaultPage}"]`);
+      showPage(defaultPage, triggerId, subEl);
+    }
+  }
+}
+
+/**
+ * Load a page by id. Fetches pages/{id}.html and injects into #content.
+ * el = the nav element to mark active (nav-item or nav-sub-item)
+ */
+async function showPage(id, groupTriggerId, el) {
   // Clear all active states
-  document.querySelectorAll('.nav-item, .nav-sub-item, .nav-group-trigger').forEach(n => {
-    n.classList.remove('active');
-  });
+  document.querySelectorAll('.nav-item, .nav-sub-item').forEach(n => n.classList.remove('active'));
 
-  // Mark nav item or sub-item active
-  const navEl = document.querySelector(
-    `.nav-item[data-page="${id}"], .nav-sub-item[data-page="${id}"]`
-  );
-  if (navEl) navEl.classList.add('active');
+  // Mark the clicked element active
+  if (el) el.classList.add('active');
 
-  // Keep group trigger highlighted if sub-page
+  // If this page belongs to a group, keep the group trigger highlighted
   if (groupTriggerId) {
     const trigger = document.getElementById(groupTriggerId);
     if (trigger) trigger.classList.add('active');
   }
 
-  // Breadcrumb
+  // Update breadcrumb
   const bc = document.getElementById('breadcrumbCurrent');
   if (bc) bc.textContent = PAGE_TITLES[id] || id;
 
-  // URL hash
-  history.pushState({ page: id }, '', '#' + id);
+  // Update URL hash
+  history.pushState({ page: id, group: groupTriggerId }, '', '#' + id);
 
   const content = document.getElementById('content');
   const loading = document.getElementById('content-loading');
@@ -59,13 +82,13 @@ async function loadPage(id, groupTriggerId) {
   try {
     if (!pageCache[id]) {
       const res = await fetch(`pages/${id}.html`);
-      if (!res.ok) throw new Error('not found');
+      if (!res.ok) throw new Error(`Not found: ${id}`);
       pageCache[id] = await res.text();
     }
     content.innerHTML = pageCache[id];
     content.style.display = 'block';
     window.scrollTo(0, 0);
-  } catch (e) {
+  } catch (err) {
     content.innerHTML = `
       <div class="placeholder-notice">
         <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -82,48 +105,38 @@ async function loadPage(id, groupTriggerId) {
   }
 }
 
-// ── TOGGLE GROUP ──
-function openGroup(triggerId) {
-  const trigger = document.getElementById(triggerId);
-  const subList = document.getElementById(triggerId + '-list');
-  if (!trigger || !subList) return;
-  trigger.classList.add('open');
-  subList.classList.add('open');
-}
-
-function closeGroup(triggerId) {
-  const trigger = document.getElementById(triggerId);
-  const subList = document.getElementById(triggerId + '-list');
-  if (!trigger || !subList) return;
-  trigger.classList.remove('open', 'active');
-  subList.classList.remove('open');
-}
-
-// ── SEARCH ──
+/**
+ * Filter sidebar nav items AND group triggers based on search input.
+ */
 function filterNav(q) {
   const term = q.toLowerCase().trim();
 
+  // Filter regular nav items
   document.querySelectorAll('.nav-item').forEach(item => {
-    item.classList.toggle('hidden', term !== '' && !item.textContent.toLowerCase().includes(term));
+    const text = item.textContent.toLowerCase();
+    item.classList.toggle('hidden', term !== '' && !text.includes(term));
   });
 
+  // Filter group triggers and their sub-items
   document.querySelectorAll('.nav-group-trigger').forEach(trigger => {
     const subList = document.getElementById(trigger.id + '-list');
-    const subs = subList ? subList.querySelectorAll('.nav-sub-item') : [];
-    let anyMatch = false;
+    const subItems = subList ? subList.querySelectorAll('.nav-sub-item') : [];
+    const triggerText = trigger.textContent.toLowerCase();
 
-    subs.forEach(sub => {
+    let anySubMatch = false;
+    subItems.forEach(sub => {
       const match = term === '' || sub.textContent.toLowerCase().includes(term);
       sub.classList.toggle('hidden', !match);
-      if (match) anyMatch = true;
+      if (match) anySubMatch = true;
     });
 
-    const show = term === '' || trigger.textContent.toLowerCase().includes(term) || anyMatch;
-    trigger.classList.toggle('hidden', !show);
+    const triggerMatch = term === '' || triggerText.includes(term) || anySubMatch;
+    trigger.classList.toggle('hidden', !triggerMatch);
 
-    if (term && anyMatch && subList) {
+    // Auto-expand group if sub-items match
+    if (term && anySubMatch) {
       trigger.classList.add('open');
-      subList.classList.add('open');
+      if (subList) subList.classList.add('open');
     }
   });
 
@@ -136,7 +149,9 @@ function filterNav(q) {
   }
 }
 
-// ── RESTORE FROM HASH ──
+/**
+ * Restore page state from URL hash on load / back-forward.
+ */
 function restoreFromHash(hash) {
   if (!hash) hash = 'introduction';
 
@@ -145,59 +160,25 @@ function restoreFromHash(hash) {
   if (subEl) {
     const subList = subEl.closest('.nav-sub-list');
     const triggerId = subList ? subList.id.replace('-list', '') : null;
-    if (triggerId) openGroup(triggerId);
-    loadPage(hash, triggerId);
+    if (triggerId) {
+      const trigger = document.getElementById(triggerId);
+      if (trigger) trigger.classList.add('open', 'active');
+      if (subList) subList.classList.add('open');
+    }
+    showPage(hash, triggerId, subEl);
     return;
   }
 
-  loadPage(hash, null);
+  // Regular nav item
+  const navEl = document.querySelector(`.nav-item[data-page="${hash}"]`);
+  showPage(hash, null, navEl);
 }
 
-// ── BIND ALL EVENT LISTENERS ON DOM READY ──
 document.addEventListener('DOMContentLoaded', () => {
-
-  // Search input
-  const searchInput = document.getElementById('searchInput');
-  if (searchInput) {
-    searchInput.addEventListener('input', () => filterNav(searchInput.value));
-  }
-
-  // Regular nav items
-  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
-    item.addEventListener('click', () => loadPage(item.dataset.page, null));
-  });
-
-  // Group triggers
-  document.querySelectorAll('.nav-group-trigger[data-group]').forEach(trigger => {
-    trigger.addEventListener('click', () => {
-      const isOpen = trigger.classList.contains('open');
-      const groupId = trigger.dataset.group;
-      const defaultPage = trigger.dataset.default;
-
-      if (isOpen) {
-        closeGroup(groupId);
-      } else {
-        openGroup(groupId);
-        if (defaultPage) loadPage(defaultPage, groupId);
-      }
-    });
-  });
-
-  // Sub-items
-  document.querySelectorAll('.nav-sub-item[data-page]').forEach(item => {
-    item.addEventListener('click', () => {
-      const subList = item.closest('.nav-sub-list');
-      const triggerId = subList ? subList.id.replace('-list', '') : null;
-      loadPage(item.dataset.page, triggerId);
-    });
-  });
-
-  // Restore from URL hash
   const hash = location.hash.replace('#', '');
   restoreFromHash(hash);
 });
 
-// Browser back/forward
 window.addEventListener('popstate', (e) => {
   const id = (e.state && e.state.page) || 'introduction';
   restoreFromHash(id);
