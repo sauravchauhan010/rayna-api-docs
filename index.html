@@ -49,8 +49,7 @@
            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
       </svg>
-      <input id="searchInput" type="text" placeholder="Search docs…"
-             oninput="filterNav(this.value)"/>
+      <input id="searchInput" type="text" placeholder="Search docs…"/>
     </div>
   </div>
 
@@ -59,108 +58,98 @@
 
     <div class="nav-group-label">Overview</div>
 
-    <a class="nav-item" data-page="introduction" onclick="showPage('introduction', null, this)">
+    <a class="nav-item" data-page="introduction">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       Introduction
     </a>
 
-    <a class="nav-item" data-page="implementation" onclick="showPage('implementation', null, this)">
+    <a class="nav-item" data-page="implementation">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       Implementation Approach
     </a>
 
-    <a class="nav-item" data-page="downloads" onclick="showPage('downloads', null, this)">
+    <a class="nav-item" data-page="downloads">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Documentation &amp; Downloads
     </a>
 
-    <a class="nav-item" data-page="faq" onclick="showPage('faq', null, this)">
+    <a class="nav-item" data-page="faq">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
       FAQ
     </a>
 
-    <a class="nav-item" data-page="contact" onclick="showPage('contact', null, this)">
+    <a class="nav-item" data-page="contact">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Contact Us
     </a>
 
     <div class="nav-group-label">API Reference</div>
 
-    <a class="nav-item" data-page="process" onclick="showPage('process', null, this)">
+    <a class="nav-item" data-page="process">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
       Process Description
     </a>
 
-    <a class="nav-item" data-page="country" onclick="showPage('country', null, this)">
+    <a class="nav-item" data-page="country">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       Country
     </a>
 
-    <a class="nav-item" data-page="city" onclick="showPage('city', null, this)">
+    <a class="nav-item" data-page="city">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       City
     </a>
 
     <!-- Static Data (expandable group) -->
     <div class="nav-group">
-      <div class="nav-group-trigger" id="group-static"
-           onclick="toggleGroup('group-static', 'static-data')">
+      <div class="nav-group-trigger" id="group-static" data-group="group-static" data-default="static-data">
         <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
         Static Data
         <svg class="chevron" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="nav-sub-list" id="group-static-list">
-        <a class="nav-sub-item" data-page="static-data"
-           onclick="showPage('static-data', 'group-static', this)">
-          Tour Static Data
-        </a>
-        <a class="nav-sub-item" data-page="static-data-by-id"
-           onclick="showPage('static-data-by-id', 'group-static', this)">
-          Tour Static Data by Id
-        </a>
-        <a class="nav-sub-item" data-page="option-static-data"
-           onclick="showPage('option-static-data', 'group-static', this)">
-          Option Static Data
-        </a>
+        <a class="nav-sub-item" data-page="static-data">Tour Static Data</a>
+        <a class="nav-sub-item" data-page="static-data-by-id">Tour Static Data by Id</a>
+        <a class="nav-sub-item" data-page="option-static-data">Option Static Data</a>
       </div>
     </div>
 
-    <a class="nav-item" data-page="tour-price" onclick="showPage('tour-price', null, this)">
+    <a class="nav-item" data-page="tour-price">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
       Tour Price
     </a>
 
-    <a class="nav-item" data-page="tour-options" onclick="showPage('tour-options', null, this)">
+    <a class="nav-item" data-page="tour-options">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
       Tour Options
     </a>
 
-    <a class="nav-item" data-page="tour-timeslot" onclick="showPage('tour-timeslot', null, this)">
+    <a class="nav-item" data-page="tour-timeslot">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       Tour Timeslot
     </a>
 
-    <a class="nav-item" data-page="tour-availability" onclick="showPage('tour-availability', null, this)">
+    <a class="nav-item" data-page="tour-availability">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       Tour Availability
     </a>
 
-    <a class="nav-item" data-page="cancellation-policy" onclick="showPage('cancellation-policy', null, this)">
+    <a class="nav-item" data-page="cancellation-policy">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
       Tour Cancellation Policy
     </a>
 
-    <a class="nav-item" data-page="tour-booking" onclick="showPage('tour-booking', null, this)">
+    <a class="nav-item" data-page="tour-booking">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
       Tour Booking
     </a>
 
-    <a class="nav-item" data-page="ticket-details" onclick="showPage('ticket-details', null, this)">
+    <a class="nav-item" data-page="ticket-details">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><line x1="9" y1="12" x2="15" y2="12"/></svg>
       Ticket Details
     </a>
 
-    <a class="nav-item" data-page="tour-cancellation" onclick="showPage('tour-cancellation', null, this)">
+    <a class="nav-item" data-page="tour-cancellation">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
       Tour Cancellation
     </a>
